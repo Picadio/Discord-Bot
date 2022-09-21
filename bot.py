@@ -164,17 +164,17 @@ def in_16(x):
 	while x!=0:
 		tmp=x%16
 		if(tmp==10):
-			temp="a"
+			temp="A"
 		elif(tmp==11):
-			temp="b"
+			temp="B"
 		elif(tmp==12):
-			temp="c"
+			temp="C"
 		elif(tmp==13):
-			temp="d"
+			temp="D"
 		elif(tmp==14):
-			temp="e"
+			temp="E"
 		elif(tmp==15):
-			temp="f"
+			temp="F"
 		else:
 			temp = str(tmp)
 		list.append(temp)
@@ -190,7 +190,7 @@ class sixteenmodal(Modal, title="Вирішити тест"):
 		global ans
 		global rand
 		global time
-		if(ans.value.lower() == in_16(rand)):
+		if(ans.value.upper() == in_16(rand)):
 			em = discord.Embed(colour= 2883328, title=f"Переведення в шістнадцяткову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
 			em.add_field(name="Правильна відповідь:", value=in_16(rand))
