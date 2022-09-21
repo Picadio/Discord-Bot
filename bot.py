@@ -306,19 +306,19 @@ async def prepare_test(ctx):
 async def in2(ctx, message):
 	ms = int(message)
 	ans = in_2(ms)
-	await ctx.msg.reply(ans)
+	await ctx.message.reply(ans)
 		
 @Bot.command(pass_context=True)
 async def in8(ctx, message):
 	ms = int(message)
 	ans = in_8(ms)
-	await ctx.msg.reply(ans)
+	await ctx.message.reply(ans)
 	
 @Bot.command(pass_context=True)
 async def in16(ctx, message):
 	ms = int(message)
 	ans = in_16(ms)
-	await ctx.msg.reply(ans)
+	await ctx.message.reply(ans)
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
