@@ -303,16 +303,22 @@ async def prepare_test(ctx):
 		)
 		await ctx.message.delete()
 @Bot.command(pass_context=True)
-async def in2(ctx, msg):
-	await ctx.msg.reply(in_2(int(msg)))
+async def in2(ctx, message):
+	ms = int(message)
+	ans = in_2(ms)
+	await ctx.msg.reply(ans)
 		
 @Bot.command(pass_context=True)
-async def in8(ctx, msg):
-	await ctx.msg.reply(in_8(int(msg)))
+async def in8(ctx, message):
+	ms = int(message)
+	ans = in_8(ms)
+	await ctx.msg.reply(ans)
 	
 @Bot.command(pass_context=True)
-async def in16(ctx, msg):
-	await ctx.msg.reply(in_16(int(msg)))
+async def in16(ctx, message):
+	ms = int(message)
+	ans = in_16(ms)
+	await ctx.msg.reply(ans)
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
