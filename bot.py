@@ -4,7 +4,7 @@ from discord.ext.commands import Bot
 from discord.utils import get
 from discord.ui import Button, View, Modal, TextInput
 import os
-
+import random
 class PersistentViewBot(commands.Bot):
 	def __init__(self):
 		intents = discord.Intents.all()
