@@ -298,7 +298,7 @@ async def calc(ctx, message):
 async def prepare_test(ctx):
 	if(ctx.message.author.id == 343279631807545356):
 		await ctx.channel.send(
-			embed=discord.Embed(colour= 0x39d0d6,title="Тренувальник для переводу чисел в різні систми числення",description="Оберіть в яку систему числення ви хочете переводити число"),
+			embed=discord.Embed(colour= 0x39d0d6,title="Тренувальник для переводу чисел в різні системи числення",description="Оберіть в яку систему числення ви хочете переводити число"),
 			view=PersistentViewtest()
 		)
 		await ctx.message.delete()
