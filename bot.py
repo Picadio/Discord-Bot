@@ -89,7 +89,7 @@ class PersistentView(discord.ui.View):
 		else:
 			await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
 
-def in2(x):
+def in_2(x):
 	list = []
 	while x!=0:
 		tmp=x%2
@@ -108,10 +108,10 @@ class twomodal(Modal, title="Вирішити тест"):
 		global ans
 		global rand
 		global time
-		if(ans.value == in2(rand)):
+		if(ans.value == in_2(rand)):
 			em = discord.Embed(colour= 2883328, title=f"Переведення в двійкову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in2(rand))
+			em.add_field(name="Правильна відповідь:", value=in_2(rand))
 			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="OK", icon_url="https://cdn.pixabay.com/photo/2017/03/28/01/46/check-mark-2180770_960_720.png")
@@ -119,13 +119,13 @@ class twomodal(Modal, title="Вирішити тест"):
 		else:
 			em = discord.Embed(colour= 16711680, title=f"Переведення в двійкову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in2(rand))
+			em.add_field(name="Правильна відповідь:", value=in_2(rand))
 			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
 
-def in8(x):
+def in_8(x):
 	list = []
 	while x!=0:
 		tmp=x%8
@@ -142,10 +142,10 @@ class eightmodal(Modal, title="Вирішити тест"):
 		global ans
 		global rand
 		global time
-		if(ans.value == in8(rand)):
+		if(ans.value == in_8(rand)):
 			em = discord.Embed(colour= 2883328, title=f"Переведення в вісімкову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in8(rand))
+			em.add_field(name="Правильна відповідь:", value=in_8(rand))
 			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="OK", icon_url="https://cdn.pixabay.com/photo/2017/03/28/01/46/check-mark-2180770_960_720.png")
@@ -153,13 +153,13 @@ class eightmodal(Modal, title="Вирішити тест"):
 		else:
 			em = discord.Embed(colour= 16711680, title=f"Переведення в вісімкову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in8(rand))
+			em.add_field(name="Правильна відповідь:", value=in_8(rand))
 			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
 
-def in16(x):
+def in_16(x):
 	list = []
 	while x!=0:
 		tmp=x%16
@@ -190,10 +190,10 @@ class sixteenmodal(Modal, title="Вирішити тест"):
 		global ans
 		global rand
 		global time
-		if(ans.value.lower() == in16(rand)):
+		if(ans.value.lower() == in_16(rand)):
 			em = discord.Embed(colour= 2883328, title=f"Переведення в шістнадцяткову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in16(rand))
+			em.add_field(name="Правильна відповідь:", value=in_16(rand))
 			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="OK", icon_url="https://cdn.pixabay.com/photo/2017/03/28/01/46/check-mark-2180770_960_720.png")
@@ -201,7 +201,7 @@ class sixteenmodal(Modal, title="Вирішити тест"):
 		else:
 			em = discord.Embed(colour= 16711680, title=f"Переведення в шістнадцяткову систему числа {rand}", description="=======================================")
 			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in16(rand))
+			em.add_field(name="Правильна відповідь:", value=in_16(rand))
 			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
@@ -223,7 +223,7 @@ class PersistentViewtest(discord.ui.View):
 			modal.add_item(ans)
 
 			await interaction.response.send_modal(modal)
-			print(in2(rand))
+			print(in_2(rand))
 	@discord.ui.button(custom_id='persistent_view:test8', label='8', style=discord.ButtonStyle.blurple)
 	async def test8(self, interaction: discord.Interaction, button: discord.ui.Button):
 		global rand
@@ -236,7 +236,7 @@ class PersistentViewtest(discord.ui.View):
 		modal.add_item(ans)
 
 		await interaction.response.send_modal(modal)
-		print(in8(rand))
+		print(in_8(rand))
 	@discord.ui.button(custom_id='persistent_view:test16', label='16', style=discord.ButtonStyle.blurple)
 	async def test16(self, interaction: discord.Interaction, button: discord.ui.Button):
 		global rand
@@ -249,7 +249,7 @@ class PersistentViewtest(discord.ui.View):
 		modal.add_item(ans)
 
 		await interaction.response.send_modal(modal)
-		print(in16(rand))
+		print(in_16(rand))
 
 """COMMAND"""
 
@@ -302,6 +302,17 @@ async def prepare_test(ctx):
 			view=PersistentViewtest()
 		)
 		await ctx.message.delete()
+@Bot.command(pass_context=True)
+async def in2(ctx, msg):
+	await ctx.msg.reply(in_2(int(msg)))
+		
+@Bot.command(pass_context=True)
+async def in8(ctx, msg):
+	await ctx.msg.reply(in_8(int(msg)))
+	
+@Bot.command(pass_context=True)
+async def in16(ctx, msg):
+	await ctx.msg.reply(in_16(int(msg)))
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
