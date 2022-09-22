@@ -124,6 +124,10 @@ class twomodal(Modal, title="Вирішити тест"):
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
+		print("Type 2")
+		print(ans.value)
+		print(in_2(rand))
+		print(interaction.created_at-time)
 
 def in_8(x):
 	list = []
@@ -158,6 +162,10 @@ class eightmodal(Modal, title="Вирішити тест"):
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
+		print("Type 8")
+		print(ans.value)
+		print(in_8(rand))
+		print(interaction.created_at-time)
 
 def in_16(x):
 	list = []
@@ -206,6 +214,10 @@ class sixteenmodal(Modal, title="Вирішити тест"):
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
+		print("Type 16")
+		print(ans.value)
+		print(in_16(rand))
+		print(interaction.created_at-time)
 
 class PersistentViewtest(discord.ui.View):
 	def __init__(self):
@@ -219,7 +231,7 @@ class PersistentViewtest(discord.ui.View):
 			global ans
 			global time
 			time = interaction.created_at
-			ans = TextInput(label=f'Перведіть число {rand} в 2 систему числення', required=True)
+			ans = TextInput(label=f'Переведіть число {rand} в 2 систему числення', required=True)
 			modal.add_item(ans)
 
 			await interaction.response.send_modal(modal)
@@ -232,7 +244,7 @@ class PersistentViewtest(discord.ui.View):
 		global ans
 		global time
 		time = interaction.created_at
-		ans = TextInput(label=f'Перведіть число {rand} в 8 систему числення', required=True)
+		ans = TextInput(label=f'Переведіть число {rand} в 8 систему числення', required=True)
 		modal.add_item(ans)
 
 		await interaction.response.send_modal(modal)
@@ -245,7 +257,7 @@ class PersistentViewtest(discord.ui.View):
 		global ans
 		global time
 		time = interaction.created_at
-		ans = TextInput(label=f'Перведіть число {rand} в 16 систему числення', required=True)
+		ans = TextInput(label=f'Переведіть число {rand} в 16 систему числення', required=True)
 		modal.add_item(ans)
 
 		await interaction.response.send_modal(modal)
