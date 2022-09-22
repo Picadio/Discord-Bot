@@ -53,7 +53,7 @@ class PersistentView(discord.ui.View):
 	async def name_bt(self, interaction: discord.Interaction, button: discord.ui.Button):
 		if (interaction.user.voice==None):
 			await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
-		elif(interaction.user.voice.channel.category.name=="🔒 CREATE Private channels"):
+		elif(interaction.user.voice.channel.category.id=="1020763715836059699" and interaction.user.voice.channel.category.id=="852919409952423966"):
 			await interaction.response.send_modal(NameModal())
 		else:
 			await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
@@ -63,7 +63,7 @@ class PersistentView(discord.ui.View):
 		role = interaction.guild.default_role
 		if (interaction.user.voice==None):
 			await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
-		elif(interaction.user.voice.channel.category.name=="🔒 CREATE Private channels"):
+		elif(interaction.user.voice.channel.category.id=="1020763715836059699" and interaction.user.voice.channel.category.id=="852919409952423966"):
 			await interaction.user.voice.channel.set_permissions(role, connect=False)
 			await interaction.response.send_message(" ")
 		else:
@@ -74,7 +74,7 @@ class PersistentView(discord.ui.View):
 		role = interaction.guild.default_role
 		if (interaction.user.voice==None):
 			await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
-		elif(interaction.user.voice.channel.category.name=="🔒 CREATE Private channels"):
+		elif(interaction.user.voice.channel.category.id=="1020763715836059699" and interaction.user.voice.channel.category.id=="852919409952423966"):
 			await interaction.user.voice.channel.set_permissions(role, connect=True)
 			await interaction.response.send_message(" ")
 		else:
@@ -84,7 +84,7 @@ class PersistentView(discord.ui.View):
 	async def scp_bt(self, interaction: discord.Interaction, button: discord.ui.Button):
 		if (interaction.user.voice==None):
 			await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
-		elif(interaction.user.voice.channel.category.name=="🔒 CREATE Private channels"):
+		elif(interaction.user.voice.channel.category.id=="1020763715836059699" and interaction.user.voice.channel.category.id=="852919409952423966"):
 			await interaction.response.send_modal(SCPModal())
 		else:
 			await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
