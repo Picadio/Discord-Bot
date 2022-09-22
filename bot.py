@@ -260,7 +260,7 @@ async def id(ctx):
 
 @Bot.command(pass_context=True)
 async def prepare(ctx):
-	if(ctx.message.author.id == 343279631807545356 and ctx.message.channel.name == "commands"):
+	if(ctx.message.author.id == 343279631807545356):
 		await ctx.channel.send(
 		embed=discord.Embed(colour= 0x39d0d6,title="Room management panel", description="Name - change room name \n\n Lock - lock room \n\n Unlock - unlock room \n\n SCP - Set count people"),
 		view=PersistentView()	
