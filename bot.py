@@ -214,7 +214,7 @@ class PersistentViewtest(discord.ui.View):
 	@discord.ui.button(custom_id='persistent_view:test2', label='2', style=discord.ButtonStyle.blurple)
 	async def test2(self, interaction: discord.Interaction, button: discord.ui.Button):
 			global rand
-			rand = random.randint(1, 100)
+			rand = random.randint(1, 999)
 			modal = twomodal()
 			global ans
 			global time
@@ -227,7 +227,7 @@ class PersistentViewtest(discord.ui.View):
 	@discord.ui.button(custom_id='persistent_view:test8', label='8', style=discord.ButtonStyle.blurple)
 	async def test8(self, interaction: discord.Interaction, button: discord.ui.Button):
 		global rand
-		rand = random.randint(1, 100)
+		rand = random.randint(1, 999)
 		modal = eightmodal()
 		global ans
 		global time
@@ -240,7 +240,7 @@ class PersistentViewtest(discord.ui.View):
 	@discord.ui.button(custom_id='persistent_view:test16', label='16', style=discord.ButtonStyle.blurple)
 	async def test16(self, interaction: discord.Interaction, button: discord.ui.Button):
 		global rand
-		rand = random.randint(1, 100)
+		rand = random.randint(1, 999)
 		modal = sixteenmodal()
 		global ans
 		global time
