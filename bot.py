@@ -237,7 +237,7 @@ class PersistentViewtest(discord.ui.View):
 		modal.add_item(ans8)
 
 		await interaction.response.send_modal(modal)
-		print(in_8(rand))
+		print(in_8(rand8))
 	@discord.ui.button(custom_id='persistent_view:test16', label='16', style=discord.ButtonStyle.blurple)
 	async def test16(self, interaction: discord.Interaction, button: discord.ui.Button):
 		global rand16
