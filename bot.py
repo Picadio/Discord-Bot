@@ -105,29 +105,25 @@ def in_2(x):
 
 class twomodal(Modal, title="Вирішити тест"):
 	async def on_submit(self, interaction: discord.Interaction):
-		global ans
-		global rand
-		global time
-		if(ans.value == in_2(rand)):
-			em = discord.Embed(colour= 2883328, title=f"Переведення в двійкову систему числа {rand}", description="=======================================")
-			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in_2(rand))
-			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
+		global ans2
+		global rand2
+		global time2
+		if(ans2.value == in_2(rand2)):
+			em = discord.Embed(colour= 2883328, title=f"Переведення в двійкову систему числа {rand2}", description="=======================================")
+			em.add_field(name="Відповідь учасника:", value=ans2.value)
+			em.add_field(name="Правильна відповідь:", value=in_2(rand2))
+			em.add_field(name="Часу було витрачено", value=interaction.created_at-time2, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="OK", icon_url="https://cdn.pixabay.com/photo/2017/03/28/01/46/check-mark-2180770_960_720.png")
 			await interaction.response.send_message(embed=em, ephemeral=True)
 		else:
-			em = discord.Embed(colour= 16711680, title=f"Переведення в двійкову систему числа {rand}", description="=======================================")
-			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in_2(rand))
-			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
+			em = discord.Embed(colour= 16711680, title=f"Переведення в двійкову систему числа {rand2}", description="=======================================")
+			em.add_field(name="Відповідь учасника:", value=ans2.value)
+			em.add_field(name="Правильна відповідь:", value=in_2(rand2))
+			em.add_field(name="Часу було витрачено", value=interaction.created_at-time2, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
-		print("Type 2")
-		print(ans.value)
-		print(in_2(rand))
-		print(interaction.created_at-time)
 
 def in_8(x):
 	list = []
@@ -143,29 +139,26 @@ def in_8(x):
 
 class eightmodal(Modal, title="Вирішити тест"):
 	async def on_submit(self, interaction: discord.Interaction):
-		global ans
-		global rand
-		global time
-		if(ans.value == in_8(rand)):
-			em = discord.Embed(colour= 2883328, title=f"Переведення в вісімкову систему числа {rand}", description="=======================================")
-			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in_8(rand))
-			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
+		global ans8
+		global rand8
+		global time8
+		if(ans8.value == in_8(rand8)):
+			em = discord.Embed(colour= 2883328, title=f"Переведення в вісімкову систему числа {rand8}", description="=======================================")
+			em.add_field(name="Відповідь учасника:", value=ans8.value)
+			em.add_field(name="Правильна відповідь:", value=in_8(rand8))
+			em.add_field(name="Часу було витрачено", value=interaction.created_at-time8, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="OK", icon_url="https://cdn.pixabay.com/photo/2017/03/28/01/46/check-mark-2180770_960_720.png")
 			await interaction.response.send_message(embed=em, ephemeral=True)
 		else:
-			em = discord.Embed(colour= 16711680, title=f"Переведення в вісімкову систему числа {rand}", description="=======================================")
-			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in_8(rand))
-			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
+			em = discord.Embed(colour= 16711680, title=f"Переведення в вісімкову систему числа {rand8}", description="=======================================")
+			em.add_field(name="Відповідь учасника:", value=ans8.value)
+			em.add_field(name="Правильна відповідь:", value=in_8(rand8))
+			em.add_field(name="Часу було витрачено", value=interaction.created_at-time8, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
-		print("Type 8")
-		print(ans.value)
-		print(in_8(rand))
-		print(interaction.created_at-time)
+		
 
 def in_16(x):
 	list = []
@@ -195,29 +188,25 @@ def in_16(x):
 
 class sixteenmodal(Modal, title="Вирішити тест"):
 	async def on_submit(self, interaction: discord.Interaction):
-		global ans
-		global rand
-		global time
-		if(ans.value.upper() == in_16(rand)):
-			em = discord.Embed(colour= 2883328, title=f"Переведення в шістнадцяткову систему числа {rand}", description="=======================================")
-			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in_16(rand))
-			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
+		global ans16
+		global rand16
+		global time16
+		if(ans16.value.upper() == in_16(rand16)):
+			em = discord.Embed(colour= 2883328, title=f"Переведення в шістнадцяткову систему числа {rand16}", description="=======================================")
+			em.add_field(name="Відповідь учасника:", value=ans16.value)
+			em.add_field(name="Правильна відповідь:", value=in_16(rand16))
+			em.add_field(name="Часу було витрачено", value=interaction.created_at-time16, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="OK", icon_url="https://cdn.pixabay.com/photo/2017/03/28/01/46/check-mark-2180770_960_720.png")
 			await interaction.response.send_message(embed=em, ephemeral=True)
 		else:
-			em = discord.Embed(colour= 16711680, title=f"Переведення в шістнадцяткову систему числа {rand}", description="=======================================")
-			em.add_field(name="Відповідь учасника:", value=ans.value)
-			em.add_field(name="Правильна відповідь:", value=in_16(rand))
-			em.add_field(name="Часу було витрачено", value=interaction.created_at-time, inline=False)
+			em = discord.Embed(colour= 16711680, title=f"Переведення в шістнадцяткову систему числа {rand16}", description="=======================================")
+			em.add_field(name="Відповідь учасника:", value=ans16.value)
+			em.add_field(name="Правильна відповідь:", value=in_16(rand16))
+			em.add_field(name="Часу було витрачено", value=interaction.created_at-time16, inline=False)
 			em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
 			em.set_author(name="Bad", icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
 			await interaction.response.send_message(embed=em, ephemeral=True)
-		print("Type 16")
-		print(ans.value)
-		print(in_16(rand))
-		print(interaction.created_at-time)
 
 class PersistentViewtest(discord.ui.View):
 	def __init__(self):
@@ -225,43 +214,43 @@ class PersistentViewtest(discord.ui.View):
 
 	@discord.ui.button(custom_id='persistent_view:test2', label='2', style=discord.ButtonStyle.blurple)
 	async def test2(self, interaction: discord.Interaction, button: discord.ui.Button):
-			global rand
-			rand = random.randint(1, 999)
+			global rand2
+			rand2 = random.randint(1, 999)
 			modal = twomodal()
-			global ans
-			global time
-			time = interaction.created_at
-			ans = TextInput(label=f'Переведіть число {rand} в 2 систему числення', required=True)
-			modal.add_item(ans)
+			global ans2
+			global time2
+			time2 = interaction.created_at
+			ans2 = TextInput(label=f'Переведіть число {rand2} в 2 систему числення', required=True)
+			modal.add_item(ans2)
 
 			await interaction.response.send_modal(modal)
-			print(in_2(rand))
+			print(in_2(rand2))
 	@discord.ui.button(custom_id='persistent_view:test8', label='8', style=discord.ButtonStyle.blurple)
 	async def test8(self, interaction: discord.Interaction, button: discord.ui.Button):
-		global rand
-		rand = random.randint(1, 999)
+		global rand8
+		rand8 = random.randint(1, 999)
 		modal = eightmodal()
-		global ans
-		global time
-		time = interaction.created_at
-		ans = TextInput(label=f'Переведіть число {rand} в 8 систему числення', required=True)
-		modal.add_item(ans)
+		global ans8
+		global time8
+		time8 = interaction.created_at
+		ans8 = TextInput(label=f'Переведіть число {rand8} в 8 систему числення', required=True)
+		modal.add_item(ans8)
 
 		await interaction.response.send_modal(modal)
 		print(in_8(rand))
 	@discord.ui.button(custom_id='persistent_view:test16', label='16', style=discord.ButtonStyle.blurple)
 	async def test16(self, interaction: discord.Interaction, button: discord.ui.Button):
-		global rand
-		rand = random.randint(1, 999)
+		global rand16
+		rand16 = random.randint(1, 999)
 		modal = sixteenmodal()
-		global ans
-		global time
-		time = interaction.created_at
-		ans = TextInput(label=f'Переведіть число {rand} в 16 систему числення', required=True)
-		modal.add_item(ans)
+		global ans16
+		global time16
+		time16 = interaction.created_at
+		ans16 = TextInput(label=f'Переведіть число {rand16} в 16 систему числення', required=True)
+		modal.add_item(ans16)
 
 		await interaction.response.send_modal(modal)
-		print(in_16(rand))
+		print(in_16(rand16))
 
 """COMMAND"""
 
