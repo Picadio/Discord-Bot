@@ -15,8 +15,8 @@ class PersistentViewBot(commands.Bot):
 		self.add_view(PersistentView())
 
 
-Bot = PersistentViewBot()
 
+Bot = PersistentViewBot()
 
 
 
