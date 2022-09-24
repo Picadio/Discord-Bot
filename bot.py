@@ -49,7 +49,7 @@ class PersistentView(discord.ui.View):
         super().__init__(timeout=None)
 
     @discord.ui.button(custom_id='persistent_view:name_bt', label='Name', style=discord.ButtonStyle.blurple)
-    async def name_bt(self, interaction: discord.Interaction):
+    async def name_bt(self, interaction: discord.Interaction, button:discord.Button):
         if interaction.user.voice is None:
             await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
         elif (str(interaction.user.voice.channel.category.id) == "1020763715836059699" or str(
@@ -59,7 +59,7 @@ class PersistentView(discord.ui.View):
             await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
 
     @discord.ui.button(custom_id='persistent_view:lock_bt', label='Lock', style=discord.ButtonStyle.blurple)
-    async def lock_bt(self, interaction: discord.Interaction):
+    async def lock_bt(self, interaction: discord.Interaction, button:discord.Button):
         role = interaction.guild.default_role
         if interaction.user.voice is None:
             await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
@@ -71,7 +71,7 @@ class PersistentView(discord.ui.View):
             await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
 
     @discord.ui.button(custom_id='persistent_view:unlock_bt', label='Unlock', style=discord.ButtonStyle.blurple)
-    async def unlock_bt(self, interaction: discord.Interaction):
+    async def unlock_bt(self, interaction: discord.Interaction, button:discord.Button):
         role = interaction.guild.default_role
         if interaction.user.voice is None:
             await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
@@ -83,7 +83,7 @@ class PersistentView(discord.ui.View):
             await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
 
     @discord.ui.button(custom_id='persistent_view:scp_bt', label='SCP', style=discord.ButtonStyle.blurple)
-    async def scp_bt(self, interaction: discord.Interaction):
+    async def scp_bt(self, interaction: discord.Interaction, button:discord.Button):
         if interaction.user.voice is None:
             await interaction.response.send_message("Ви не знаходитесь у голосовому каналі", ephemeral=True)
         elif (str(interaction.user.voice.channel.category.id) == "1020763715836059699" or str(
@@ -151,7 +151,7 @@ class PersistentViewtest(discord.ui.View):
         super().__init__(timeout=None)
 
     @discord.ui.button(custom_id='persistent_view:test2', label='2', style=discord.ButtonStyle.blurple)
-    async def test2(self, interaction: discord.Interaction):
+    async def test2(self, interaction: discord.Interaction, button:discord.Button):
 
         rand2 = random.randint(1, 999)
         modal = Modal(title="Вирішити тест")
@@ -187,7 +187,7 @@ class PersistentViewtest(discord.ui.View):
         print(in_2(rand2))
 
     @discord.ui.button(custom_id='persistent_view:test8', label='8', style=discord.ButtonStyle.blurple)
-    async def test8(self, interaction: discord.Interaction):
+    async def test8(self, interaction: discord.Interaction, button:discord.Button):
         rand8 = random.randint(1, 999)
         modal = Modal(title="Вирішити тест")
         time8 = interaction.created_at
@@ -221,7 +221,7 @@ class PersistentViewtest(discord.ui.View):
         print(in_8(rand8))
 
     @discord.ui.button(custom_id='persistent_view:test16', label='16', style=discord.ButtonStyle.blurple)
-    async def test16(self, interaction: discord.Interaction):
+    async def test16(self, interaction: discord.Interaction, button:discord.Button):
 
         rand16 = random.randint(1, 999)
         modal = Modal(title="Вирішити тест")
