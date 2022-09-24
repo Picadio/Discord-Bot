@@ -1,7 +1,5 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import Bot
-from discord.utils import get
 from discord.ui import Button, View, Modal, TextInput
 import os
 import random
@@ -306,6 +304,10 @@ async def in16(ctx, message):
 	ms = int(message)
 	ans = in_16(ms)
 	await ctx.message.reply(ans)
+
+@Bot.command(pass_context=True)
+async def hi(ctx, message):
+	await ctx.message.reply("HELLO")
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
