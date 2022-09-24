@@ -13,7 +13,7 @@ class PersistentViewBot(commands.Bot):
         super().__init__(command_prefix='.', intents=intents)
 
     async def setup_hook(self) -> None:
-        self.add_view(trainer())
+        self.add_view(PersistentViewtest())
         self.add_view(PersistentView())
 
 
@@ -146,7 +146,7 @@ def in_16(x):
     return q
 
 
-class trainer(discord.ui.View):
+class PersistentViewtest(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
@@ -312,7 +312,7 @@ async def prepare_test(ctx):
         await ctx.channel.send(
             embed=discord.Embed(colour=0x39d0d6, title="Тренувальник для переводу чисел в різні системи числення",
                                 description="Оберіть в яку систему числення ви хочете переводити число"),
-            view=trainer()
+            view=PersistentViewtest()
         )
         await ctx.message.delete()
 
