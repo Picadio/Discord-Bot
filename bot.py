@@ -160,7 +160,7 @@ class PersistentViewtest(discord.ui.View):
         ans2 = TextInput(label=f'Переведіть число {rand2} в 2 систему числення', required=True)
         modal.add_item(ans2)
 
-        async def modal_submit():
+        async def modal_submit(interaction):
             if ans2.value == in_2(rand2):
                 em = discord.Embed(colour=2883328, title=f"Переведення в двійкову систему числа {rand2}",
                                    description="=======================================")
@@ -194,7 +194,7 @@ class PersistentViewtest(discord.ui.View):
         ans8 = TextInput(label=f'Переведіть число {rand8} в 8 систему числення', required=True)
         modal.add_item(ans8)
 
-        async def modal_submit():
+        async def modal_submit(interaction):
             if ans8.value == in_8(rand8):
                 em = discord.Embed(colour=2883328, title=f"Переведення в вісімкову систему числа {rand8}",
                                    description="=======================================")
@@ -229,7 +229,7 @@ class PersistentViewtest(discord.ui.View):
         ans16 = TextInput(label=f'Переведіть число {rand16} в 16 систему числення', required=True)
         modal.add_item(ans16)
 
-        async def modal_submit():
+        async def modal_submit(interaction):
             if ans16.value.upper() == in_16(rand16):
                 em = discord.Embed(colour=2883328, title=f"Переведення в шістнадцяткову систему числа {rand16}",
                                    description="=======================================")
