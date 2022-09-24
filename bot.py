@@ -25,7 +25,7 @@ async def on_ready():
     print("Bot is online")
 
 
-'''MODAL'''
+#  MODAL
 
 
 class NameModal(Modal, title="Name for channel"):
@@ -256,7 +256,7 @@ class PersistentViewtest(discord.ui.View):
         print(in_16(rand16))
 
 
-"""COMMAND"""
+#    COMMAND
 
 
 @Bot.command(pass_context=True)
@@ -336,7 +336,9 @@ async def in16(ctx, message):
     ms = int(message)
     ans = in_16(ms)
     await ctx.message.reply(ans)
-
+@Bot.command(pass_context=True)s
+async def hi(ctx, message):
+    await ctx.message.reply("Hello bro")
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
