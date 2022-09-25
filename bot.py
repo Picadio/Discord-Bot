@@ -336,13 +336,7 @@ async def in16(ctx, message):
     ans = in_16(ms)
     await ctx.message.reply(ans)
     
-@Bot.command(pass_context=True)
-async def hi(ctx, message):
-    await ctx.message.reply("HELLO BRO")
 
-@Bot.command(pass_context=True)
-async def bye(ctx, message):
-    await ctx.message.reply("POp")
 
 
 token = os.environ.get("BOT_TOKEN")
