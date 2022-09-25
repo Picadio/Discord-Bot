@@ -342,7 +342,7 @@ async def hi(ctx, message):
 
 @Bot.command(pass_context=True)
 async def bye(ctx, message):
-    await ctx.message.reply("KICK")
+    await ctx.message.reply("iop")
 
 
 token = os.environ.get("BOT_TOKEN")
