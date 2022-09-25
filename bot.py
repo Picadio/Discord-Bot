@@ -338,7 +338,7 @@ async def in16(ctx, message):
 
 @Bot.command(pass_context=True)
 async def hi(ctx, message):
-    await ctx.message.reply("Hello")
+    await ctx.message.reply("HI")
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
