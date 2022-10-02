@@ -335,8 +335,8 @@ async def in8(ctx, message):
 
 @Bot.hybrid_command(name = "in16", with_app_command = True, description = "Перевести число в шістнадцяткову систему числення")
 @app_commands.guilds(discord.Object(id = "1020640631175004160"))
-async def in16(ctx, Date):
-    ms = int(Date)
+async def in16(ctx, data):
+    ms = int(data)
     ans = in_16(ms)
     await ctx.defer(ephemeral = True)
     await ctx.reply(ans)
