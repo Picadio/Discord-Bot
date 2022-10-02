@@ -58,10 +58,10 @@ def det(n, arr):
 
     ans = 0
     for i in range(n):
-        arrcp = []
+        arr_copy = []
         for i1 in range(1, n):
-            arrcp.append([arr[i1][j] for j in range(n) if (j != i)])
-        ans += arr[0][i] * pow(-1, i + 1 + 1) * det(n - 1, arrcp)
+            arr_copy.append([arr[i1][j] for j in range(n) if (j != i)])
+        ans += arr[0][i] * pow(-1, i + 1 + 1) * det(n - 1, arr_copy)
         print("ANSWER")
         print(ans)
     return ans

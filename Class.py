@@ -12,13 +12,13 @@ class bot(commands.Bot):
         super().__init__(command_prefix='.', intents=intents)
 
     async def setup_hook(self) -> None:
-        self.add_view(PersistentViewtest())
-        self.add_view(PersistentView())
-        await self.tree.sync(guild = discord.Object(id = "1020640631175004160"))
+        self.add_view(Tester())
+        self.add_view(ControlPanel())
+        await self.tree.sync(guild=discord.Object(id="1020640631175004160"))
         print(f"Synced slash commands for {self.user}.")
 
     async def on_command_error(self, ctx, error):
-        await ctx.reply(error, ephemeral = True)
+        await ctx.reply(error, ephemeral=True)
 
 
 class NameModal(Modal, title="Name for channel"):
@@ -30,14 +30,14 @@ class NameModal(Modal, title="Name for channel"):
 
 
 class SCPModal(Modal, title="SET COUNT PEOPLE (0-infinity)"):
-    name = TextInput(label="Count")
+    scp = TextInput(label="Count")
 
     async def on_submit(self, interaction: discord.Interaction):
-        await interaction.user.voice.channel.edit(user_limit=int(self.name.value))
+        await interaction.user.voice.channel.edit(user_limit=int(self.scp.value))
         await interaction.response.send_message("")
 
 
-class PersistentView(discord.ui.View):
+class ControlPanel(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
@@ -85,13 +85,13 @@ class PersistentView(discord.ui.View):
         else:
             await interaction.response.send_message("Канал, в якому ви знаходитесь, неможна змінювати", ephemeral=True)
 
-class PersistentViewtest(discord.ui.View):
+
+class Tester(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=None)
 
     @discord.ui.button(custom_id='persistent_view:test2', label='2', style=discord.ButtonStyle.blurple)
     async def test2(self, interaction: discord.Interaction, button:discord.Button):
-
         rand2 = random.randint(1, 999)
         modal = Modal(title="Вирішити тест")
 
@@ -118,7 +118,8 @@ class PersistentViewtest(discord.ui.View):
                 em.add_field(name="Часу було витрачено", value=interaction.created_at - time2, inline=False)
                 em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
                 em.set_author(name="Bad",
-                              icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
+                              icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz"
+                                       "-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
                 await interaction.response.send_message(embed=em, ephemeral=True)
 
         modal.on_submit = modal_submit
@@ -152,7 +153,8 @@ class PersistentViewtest(discord.ui.View):
                 em.add_field(name="Часу було витрачено", value=interaction.created_at - time8, inline=False)
                 em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
                 em.set_author(name="Bad",
-                              icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
+                              icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz"
+                                       "-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
                 await interaction.response.send_message(embed=em, ephemeral=True)
 
         modal.on_submit = modal_submit
@@ -187,7 +189,8 @@ class PersistentViewtest(discord.ui.View):
                 em.add_field(name="Часу було витрачено", value=interaction.created_at - time16, inline=False)
                 em.set_footer(text=f"Вирішував:{interaction.user.name}", icon_url=interaction.user.display_avatar)
                 em.set_author(name="Bad",
-                              icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
+                              icon_url="https://img1.freepng.ru/20180605/yop/kisspng-computer-icons-true-false-quiz"
+                                       "-world-social-med-5b162251e0d412.6314358315281772339209.jpg")
                 await interaction.response.send_message(embed=em, ephemeral=True)
 
         modal.on_submit = modal_submit
