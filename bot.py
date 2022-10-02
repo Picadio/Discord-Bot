@@ -3,21 +3,24 @@ from discord.ext import commands
 from discord.ui import Modal, TextInput
 import os
 import random
+from discord import app_commands
 
-
-class PersistentViewBot(commands.Bot):
+class Bot(commands.Bot):
     def __init__(self):
         intents = discord.Intents.all()
         intents.message_content = True
-
         super().__init__(command_prefix='.', intents=intents)
 
     async def setup_hook(self) -> None:
         self.add_view(PersistentViewtest())
         self.add_view(PersistentView())
+        await self.tree.sync(guild = discord.Object(id = "1020640631175004160"))
+        print(f"Synced slash commands for {self.user}.")
 
+    async def on_command_error(self, ctx, error):
+        await ctx.reply(error, ephemeral = True)
 
-Bot = PersistentViewBot()
+Bot = Bot()
 
 
 @Bot.event
@@ -292,14 +295,14 @@ def det(n, arr):
 
 
 @Bot.command(pass_context=True)
-async def determinant(ctx, n_st, matrix):
+async def determinant(ctx, size, matrix):
     arr = []
     listt = matrix.split("\n")
-    n = int(n_st)
+    n = int(size)
     for a in range(n):
         arr.append([int(x) for x in listt[a].split()])
-    await ctx.message.reply(det(n, arr))
-
+    await ctx.defer()
+    await ctx.reply(det(n, arr))
 
 @Bot.command(pass_context=True)
 async def calc(ctx, message):
@@ -316,33 +319,31 @@ async def prepare_test(ctx):
         )
         await ctx.message.delete()
 
-
-@Bot.command(pass_context=True)
-async def in2(ctx, message):
-    ms = int(message)
+@Bot.hybrid_command(name = "in2", with_app_command = True, description = "Перевести число в двійкову систему числення")
+@app_commands.guilds(discord.Object(id = "1020640631175004160"))
+async def in2(ctx, data):
+    ms = int(data)
     ans = in_2(ms)
-    await ctx.message.reply(ans)
+    await ctx.defer(ephemeral = True)
+    await ctx.reply(ans)
 
-
-@Bot.command(pass_context=True)
-async def in8(ctx, message):
-    ms = int(message)
+@Bot.hybrid_command(name = "in8", with_app_command = True, description = "Перевести число в вісімкову систему числення")
+@app_commands.guilds(discord.Object(id = "1020640631175004160"))
+async def in8(ctx, data):
+    ms = int(data)
     ans = in_8(ms)
-    await ctx.message.reply(ans)
+    await ctx.defer(ephemeral = True)
+    await ctx.reply(ans)
 
-@Bot.command(pass_context=True)
-async def in16(ctx, message):
-    ms = int(message)
+@Bot.hybrid_command(name = "in16", with_app_command = True, description = "Перевести число в шістнадцяткову систему числення")
+@app_commands.guilds(discord.Object(id = "1020640631175004160"))
+async def in16(ctx, data):
+    ms = int(data)
     ans = in_16(ms)
-    await ctx.message.reply(ans)
-    
-@Bot.command(pass_context=True)
-async def hi(ctx, message):
-    await ctx.message.reply("HELLO BRO")
+    await ctx.defer(ephemeral = True)
+    await ctx.reply(ans)
 
-@Bot.command(pass_context=True)
-async def bye(ctx, message):
-    await ctx.message.reply("iop")
+
 
 
 token = os.environ.get("BOT_TOKEN")
