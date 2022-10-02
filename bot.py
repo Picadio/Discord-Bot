@@ -3,21 +3,24 @@ from discord.ext import commands
 from discord.ui import Modal, TextInput
 import os
 import random
+from discord import app_commands
 
-
-class PersistentViewBot(commands.Bot):
+class Bot(commands.Bot):
     def __init__(self):
         intents = discord.Intents.all()
         intents.message_content = True
-
         super().__init__(command_prefix='.', intents=intents)
 
     async def setup_hook(self) -> None:
         self.add_view(PersistentViewtest())
         self.add_view(PersistentView())
+        await self.tree.sync(guild = discord.Object(id = "1020640631175004160"))
+        print(f"Synced slash commands for {self.user}.")
 
+    async def on_command_error(self, ctx, error):
+        await ctx.reply(error, ephemeral = True)
 
-Bot = PersistentViewBot()
+Bot = Bot()
 
 
 @Bot.event
@@ -330,11 +333,14 @@ async def in8(ctx, message):
     ans = in_8(ms)
     await ctx.message.reply(ans)
 
+@Bot.hybrid_command(name = "in16", with_app_command = True, description = "Перевести число в шістнадцяткову систему числення")
+@app_commands.guilds(discord.Object(id = "1020640631175004160"))
 @Bot.command(pass_context=True)
-async def in16(ctx, message):
-    ms = int(message)
+async def in16(ctx, Date):
+    ms = int(Date)
     ans = in_16(ms)
-    await ctx.message.reply(ans)
+    await ctx.defer(ephemeral = True)
+    await ctx.reply(ans)
 
 
 
