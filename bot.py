@@ -294,8 +294,7 @@ def det(n, arr):
     return ans
 
 
-@Bot.hybrid_command(name = "determinant", with_app_command = True, description = "Знайти визначник таблиці")
-@app_commands.guilds(discord.Object(id = "1020640631175004160"))
+@Bot.command(pass_context=True)
 async def determinant(ctx, size, matrix):
     arr = []
     listt = matrix.split("\n")
