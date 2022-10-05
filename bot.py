@@ -38,7 +38,7 @@ async def determinant(ctx, size, matrix):
     listt = matrix.split("\n")
     n = int(size)
     for a in range(n):
-        arr.append([int(x) for x in listt[a].split()])
+        arr.append([float(x) for x in listt[a].split()])
     await ctx.defer()
     await ctx.reply(det(n, arr))
 
