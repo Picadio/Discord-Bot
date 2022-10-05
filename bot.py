@@ -33,7 +33,7 @@ async def prepare(ctx, message):
 
 
 @Bot.command(pass_context=True)
-async def determinant(ctx, size, matrix):
+async def determinant(ctx, size, *, matrix):
     arr = []
     listt = matrix.split("\n")
     n = int(size)
