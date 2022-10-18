@@ -43,7 +43,7 @@ async def determinant(ctx, size, *, matrix):
     await ctx.reply(det(n, arr))
 
 
-@Bot.hybrid_command(name="in2", with_app_command=True, description="Перевести число в двійкову систему числення")
+@Bot.hybrid_command(name="reformat", with_app_command=True, description="Перевести число в із будь-якої системи числення в будь-яку. \n Де: x - число, input_type - система, в якій дано число х, output_type - система, в яку треба перевести")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
 async def reformat(ctx, x, input_type, output_type):
     await ctx.defer(ephemeral=True)
