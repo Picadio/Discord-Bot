@@ -100,6 +100,7 @@ def add2(x1, x2):
             ans += buf
     if nxt == 1:
         ans += '1'
+    print(ans[::-1])
     return ans[::-1]
 
 
