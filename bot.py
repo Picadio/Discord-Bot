@@ -45,31 +45,22 @@ async def determinant(ctx, size, *, matrix):
 
 @Bot.hybrid_command(name="in2", with_app_command=True, description="Перевести число в двійкову систему числення")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
-async def in2(ctx, data):
-    ms = int(data)
-    ans = in_2(ms)
+async def reformat(ctx, x, input_type, output_type):
     await ctx.defer(ephemeral=True)
-    await ctx.reply(ans)
+    await ctx.reply(reform(x, input_type, output_type))
 
 
-@Bot.hybrid_command(name="in8", with_app_command=True, description="Перевести число в вісімкову систему числення")
+
+@Bot.hybrid_command(name="add2", with_app_command=True, description="Додати числа в двійковій системі")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
-async def in8(ctx, data):
-    ms = int(data)
-    ans = in_8(ms)
+async def add2(ctx, num_1, num_2, input_type):
+    if input_type == "10":
+        num_1 = in_2(int(num_1))
+        num_2 = in_2(int(num_2))
+
+    ans = add2(num_1, num_2)
     await ctx.defer(ephemeral=True)
-    await ctx.reply(ans)
-
-
-@Bot.hybrid_command(name="in16", with_app_command=True, description="Перевести число в шістнадцяткову систему числення")
-@app_commands.guilds(discord.Object(id="1020640631175004160"))
-async def in16(ctx, data):
-    ms = int(data)
-    ans = in_16(ms)
-    await ctx.defer(ephemeral=True)
-    await ctx.reply(ans)
-
-
+    await ctx.reply(num_1, "\n +", num_2, "\n", ans)
 
 
 token = os.environ.get("BOT_TOKEN")
