@@ -72,7 +72,8 @@ def add2(x1, x2):
     ans = ""
     num1 = x1[::-1]
     num2 = x2[::-1]
-
+    print(num1)
+    print(num2)
     if len(num1) > len(num2):
         for i in range(len(num1)-len(num2)):
             num2 += '0'
@@ -100,6 +101,7 @@ def add2(x1, x2):
             ans += buf
     if nxt == 1:
         ans += '1'
+    print(1)
     print(ans[::-1])
     return ans[::-1]
 
