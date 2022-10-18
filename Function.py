@@ -68,19 +68,19 @@ def det(n, arr):
 
 
 def add2(x1, x2):
+
     nxt = 0
     ans = ""
     num1 = x1[::-1]
     num2 = x2[::-1]
-    print(num1)
-    print(num2)
+
     if len(num1) > len(num2):
         for i in range(len(num1)-len(num2)):
             num2 += '0'
     if len(num1) < len(num2):
         for i in range(len(num2)-len(num1)):
             num1 += '0'
-    for i in range(len(x1)):
+    for i in range(len(num1)):
         if num1[i] == '1' and num2[i] == '1':
             buf = '0'
             if nxt == 1:
@@ -101,8 +101,6 @@ def add2(x1, x2):
             ans += buf
     if nxt == 1:
         ans += '1'
-    print(1)
-    print(ans[::-1])
     return ans[::-1]
 
 
@@ -173,3 +171,4 @@ def reform(x, input_type, output_type):
             return sum
         if output_type == "16":
             return x
+    return "Ви вказали невірну систему числення"

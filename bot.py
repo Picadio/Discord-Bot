@@ -46,19 +46,21 @@ async def determinant(ctx, size, *, matrix):
 @Bot.hybrid_command(name="reformat", with_app_command=True, description="Перевести число із будь-якої системи числення в будь-яку.")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
 async def reformat(ctx, x, input_type, output_type):
-    await ctx.defer(ephemeral=True)
+    await ctx.defer()
     await ctx.reply(reform(x, input_type, output_type))
 
 
 
-@Bot.hybrid_command(name="add2", with_app_command=True, description="Додати числа в двійковій системі")
+@Bot.hybrid_command(name="add_2", with_app_command=True, description="Додати числа в двійковій системі")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
-async def add2(ctx, num_1, num_2, input_type):
+async def add_2(ctx, num_1, num_2, input_type):
     num_1 = reform(num_1, input_type, "2")
     num_2 = reform(num_2, input_type, "2")
-
-    ans = add2(num_1, num_2)
-    await ctx.defer(ephemeral=True)
+    if num_1 != "Ви вказали невірну систему числення":
+        ans = add2(num_1, num_2)
+    else:
+        ans=num_1
+    await ctx.defer()
     await ctx.reply(ans)
 
 
