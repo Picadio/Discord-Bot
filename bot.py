@@ -59,7 +59,9 @@ async def add2(ctx, num_1, num_2, input_type):
 
     ans = add2(num_1, num_2)
     await ctx.defer(ephemeral=True)
-    await ctx.reply(num_1, "\n +", num_2, "\n", ans)
+    await ctx.reply(num_1)
+    await ctx.reply(num_2)
+    await ctx.reply(ans)
 
 
 token = os.environ.get("BOT_TOKEN")
