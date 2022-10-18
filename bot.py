@@ -47,7 +47,7 @@ async def determinant(ctx, size, *, matrix):
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
 async def reformat(ctx, x, input_type, output_type):
     ans = reform(x, input_type, output_type)
-    print(ctx.message.author, x, ans)
+    print("reformat func:", ctx.message.author, x, ans)
     await ctx.defer(ephemeral=True)
     await ctx.reply(ans)
 
@@ -61,8 +61,8 @@ async def add_2(ctx, num_1, num_2, input_type):
     if num_1 != "Ви вказали невірну систему числення":
         ans = add2(num_1, num_2)
     else:
-        ans=num_1
-    print(ctx.message.author, num_1, num_2, ans)
+        ans = num_1
+    print("Add_2 func: ", ctx.message.author, num_1, num_2, ans)
     await ctx.defer(ephemeral=True)
     await ctx.reply(ans)
 
