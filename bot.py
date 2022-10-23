@@ -52,20 +52,5 @@ async def reformat(ctx, x, input_type, output_type):
     await ctx.reply(ans)
 
 
-
-@Bot.hybrid_command(name="add_2", with_app_command=True, description="Додати числа в двійковій системі")
-@app_commands.guilds(discord.Object(id="1020640631175004160"))
-async def add_2(ctx, num_1, num_2, input_type):
-    num_1 = reform(num_1, input_type, "2")
-    num_2 = reform(num_2, input_type, "2")
-    if num_1 != "Ви вказали невірну систему числення":
-        ans = add2(num_1, num_2)
-    else:
-        ans = num_1
-    print("Add_2 func: ", ctx.message.author, num_1, num_2, ans)
-    await ctx.defer(ephemeral=True)
-    await ctx.reply(ans)
-
-
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
