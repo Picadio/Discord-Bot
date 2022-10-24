@@ -147,7 +147,7 @@ def congrat_happy_birthday():
 
 def happy_birthday():
     while True:
-        if int(datetime.datetime.now().strftime("%H"))+3 == 20:
+        if int(datetime.datetime.now().strftime("%H"))+3 == 21:
             print("congrat")
             congrat_happy_birthday()
         print("plak")
