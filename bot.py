@@ -154,7 +154,7 @@ async def happy_birthday():
     print("plak")
 
 
-
+happy_birthday.start()
 
 
 token = os.environ.get("BOT_TOKEN")
