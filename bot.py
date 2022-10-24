@@ -134,9 +134,12 @@ async def happy_birthday():
                         embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
                         #embed.set_footer(text="Років виповнилося {0}".format(datetime.datetime.now().year - int(row[2])))
                         #embed.add_field(name="Виповнилося", value=str(datetime.datetime.now().year - int(row[2])), inline=True)
+                        await channel.send("@everyone")
                         await channel.send(embed=embed)
+
                         print("Member happy "+str(j.id))
                         row = tuple("0")
+
                         break
             row = cursor.fetchone()
         cursor.close()
