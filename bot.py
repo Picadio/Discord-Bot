@@ -144,7 +144,7 @@ async def happy_birthday():
                             embed.set_author(name=j.name, icon_url=j.display_icon)
                             embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
                             embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
-                            await channel.send(embed=embed)
+                            await asyncio.run(channel.send(embed=embed))
                             print("Member happy"+str(j.id))
                             break
                 row = cursor.fetchone()
