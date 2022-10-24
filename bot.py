@@ -124,6 +124,7 @@ def congrat_happy_birthday():
                     break
         else:
             break
+    print(channel.name)
     while row is not None:
         for i in Bot.guilds:
             for j in i.members:
@@ -137,6 +138,9 @@ def congrat_happy_birthday():
 
 
         row = cursor.fetchone()
+    print("CONGRAT DONE")
+    cursor.close()
+    table.close()
 
 
 def happy_birthday():
