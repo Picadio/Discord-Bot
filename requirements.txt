@@ -3,4 +3,3 @@ aiohttp
 websockets
 chardet
 psycopg2
-threading
