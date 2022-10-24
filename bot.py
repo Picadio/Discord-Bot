@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 
 import discord
@@ -138,7 +139,7 @@ async def happy_birthday():
 
 
                 row = cursor.fetchone()
-        sleep(3600)
+        await asyncio.sleep(3600)
 
 Thread(target=happy_birthday).start()
 
