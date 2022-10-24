@@ -131,15 +131,14 @@ def congrat_happy_birthday():
     while row is not None:
         for i in Bot.guilds:
             for j in i.members:
-                if str(j.id) == row[0]:
+                if str(j.id) == str(row[0]):
                     embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
                     embed.set_author(name=j.name, icon_url=j.display_icon)
                     embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
                     embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
                     channel.send(embed=embed)
+                    print("Member happy"+str(j.id))
                     break
-
-
         row = cursor.fetchone()
     print("CONGRAT DONE")
     cursor.close()
