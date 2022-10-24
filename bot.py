@@ -1,6 +1,21 @@
+import datetime
+
+import discord
+
 from Class import *
 import os
 from discord import app_commands
+import psycopg2
+from threading import Thread
+from time import sleep
+
+db_url = str(os.environ.get("DATABASE_URL"))
+db_url = db_url.replace("postgres://", "")
+x = db_url.split(":")
+db_user = x[0]
+db_password = x[1].split("@")[0]
+db_host = x[1].split("@")[1]
+db_name = x[2].split("/")[1]
 
 Bot = bot()
 
@@ -51,6 +66,81 @@ async def reformat(ctx, x, input_type, output_type):
     await ctx.defer(ephemeral=True)
     await ctx.reply(ans)
 
+
+@Bot.hybrid_command(name="setbirthday", with_app_command=True, description="Встановити дату народження")
+@app_commands.guilds(discord.Object(id="1020640631175004160"))
+async def setbirthday(ctx, day, month, year):
+    table = psycopg2.connect(dbname=db_name, user=db_user,
+                             password=db_password, host=db_host)
+    cursor = table.cursor()
+    cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(ctx.message.author.id))
+    row = cursor.fetchone()
+    if row is not None:
+        cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, year, ctx.message.author.id))
+    else:
+        cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(ctx.message.author.id, day+month, year))
+    table.commit()
+    cursor.close()
+    table.close()
+    embed = discord.Embed(title="✅ Успішно", color=0x2bff00)
+    embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/2362/2362432.png")
+    embed.add_field(name="Дата народження", value=day+"."+month+"."+year, inline=True)
+    embed.set_footer(text="Встановлено для {0}".format(ctx.message.author))
+    await ctx.reply(embed=embed)
+
+
+
+@Bot.command(pass_context=True)
+async def crtable(ctx):
+    if ctx.message.author.id == "343279631807545356":
+
+        table = psycopg2.connect(dbname=db_name, user=db_user,
+                                password=db_password, host=db_host)
+
+        cursor = table.cursor()
+        cursor.execute('''CREATE TABLE birthday_tab (id text, month_day text, yr integer)''')
+        table.commit()
+        print("Sucessful")
+        cursor.close()
+        table.close()
+
+    else:
+        await ctx.reply("Ця команда доступна тільки розробнику")
+
+
+async def happy_birthday():
+    while True:
+        if datetime.datetime.now().strftime("%H") == "00":
+            channel = discord.ChannelType
+            table = psycopg2.connect(dbname=db_name, user=db_user,
+                                     password=db_password, host=db_host)
+            cursor = table.cursor()
+            cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
+            row = cursor.fetchone()
+            for i in Bot.guilds:
+                if channel == discord.ChannelType:
+                    for j in i.channels:
+                        if j.id == "1033134557467267135":
+                            channel = j
+                            break
+                else:
+                    break
+            while row is not None:
+                for i in Bot.guilds:
+                    for j in i.members:
+                        if j.id == row[0]:
+                            embed=discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
+                            embed.set_author(name=j.name, icon_url=j.display_icon)
+                            embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
+                            embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
+                            await channel.send(embed=embed)
+                            break
+
+
+                row = cursor.fetchone()
+        sleep(3600)
+
+Thread(target=happy_birthday).start()
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
