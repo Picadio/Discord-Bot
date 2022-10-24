@@ -50,7 +50,7 @@ async def reformat(ctx, x, input_type, output_type):
     print("reformat func:", ctx.message.author, x, ans)
     for i in Bot.guilds:
         print(i.name)
-        for j in i.members
+        for j in i.members:
             print(j.name)
     print(Bot.guilds[0].channels)
     await ctx.defer(ephemeral=True)
