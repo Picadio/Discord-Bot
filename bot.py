@@ -9,6 +9,7 @@ from discord import app_commands
 import psycopg2
 from threading import Thread
 from time import sleep
+from asgiref.sync import async_to_sync
 
 db_url = str(os.environ.get("DATABASE_URL"))
 db_url = db_url.replace("postgres://", "")
@@ -109,6 +110,7 @@ async def crtable(ctx):
         await ctx.reply("Ця команда доступна тільки розробнику")
 
 
+@async_to_sync
 async def congrat_happy_birthday():
     channel = discord.TextChannel
     table = psycopg2.connect(dbname=db_name, user=db_user,
@@ -148,9 +150,9 @@ async def congrat_happy_birthday():
 def happy_birthday():
     while True:
         if int(datetime.datetime.now().strftime("%H"))+3 == 21:
+            congrat_happy_birthday()
             print("congrat")
-            loop = asyncio.get_event_loop()
-            loop.run_until_complete(congrat_happy_birthday())
+
         print("plak")
         sleep(60)
 
