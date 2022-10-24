@@ -1,5 +1,6 @@
 import asyncio
 import datetime
+from discord.ext import tasks
 
 import discord
 
@@ -113,50 +114,48 @@ async def crtable(ctx):
 
 
 
-
-@async_to_sync
+@tasks.loop(seconds=60.0)
 async def happy_birthday():
-    while True:
-        if int(datetime.datetime.now().strftime("%H"))+3 == 21:
-            channel = discord.TextChannel
-            table = psycopg2.connect(dbname=db_name, user=db_user,
-                                     password=db_password, host=db_host)
-            cursor = table.cursor()
-            cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
-            row = cursor.fetchone()
+    if int(datetime.datetime.now().strftime("%H"))+3 == 21:
+        channel = discord.TextChannel
+        table = psycopg2.connect(dbname=db_name, user=db_user,
+                                 password=db_password, host=db_host)
+        cursor = table.cursor()
+        cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
+        row = cursor.fetchone()
+        for i in Bot.guilds:
+            if channel == discord.TextChannel:
+                for j in i.text_channels:
+                    print(j.id)
+                    if str(j.id) == "1033134557467267135":
+                        print("da")
+                        print(j.name)
+                        channel = j
+                        break
+            else:
+                break
+        print(channel.name)
+        while row is not None:
             for i in Bot.guilds:
-                if channel == discord.TextChannel:
-                    for j in i.text_channels:
-                        print(j.id)
-                        if str(j.id) == "1033134557467267135":
-                            print("da")
-                            print(j.name)
-                            channel = j
-                            break
-                else:
-                    break
-            print(channel.name)
-            while row is not None:
-                for i in Bot.guilds:
-                    for j in i.members:
-                        if str(j.id) == str(row[0]):
-                            embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
-                            embed.set_author(name=j.name, icon_url=j.display_icon)
-                            embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
-                            embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
-                            await asyncio.run(channel.send(embed=embed))
-                            print("Member happy"+str(j.id))
-                            break
-                row = cursor.fetchone()
-            print("CONGRAT DONE")
-            cursor.close()
-            table.close()
+                for j in i.members:
+                    if str(j.id) == str(row[0]):
+                        embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
+                        embed.set_author(name=j.name, icon_url=j.display_icon)
+                        embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
+                        embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
+                        await channel.send(embed=embed)
+                        print("Member happy"+str(j.id))
+                        break
+            row = cursor.fetchone()
+        print("CONGRAT DONE")
+        cursor.close()
+        table.close()
 
-        print("plak")
-        await asyncio.sleep(60)
+    print("plak")
 
 
-Thread(target=happy_birthday).start()
+
+
 
 token = os.environ.get("BOT_TOKEN")
 Bot.run(str(token))
