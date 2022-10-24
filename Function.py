@@ -77,7 +77,21 @@ def reform(x, input_type, output_type):
         step = 1
         sum = 0
         for i in x[::-1]:
-            sum += int(i)*step
+            if i == 'A':
+                ii = 10
+            elif i == 'B':
+                ii = 11
+            elif i == 'C':
+                ii = 12
+            elif i == 'D':
+                ii = 13
+            elif i == 'E':
+                ii = 14
+            elif i == 'F':
+                ii = 15
+            else:
+                ii = int(i)
+            sum += ii*step
             step *= int(input_type)
         x = sum
     elif input_type != "10":
@@ -85,9 +99,9 @@ def reform(x, input_type, output_type):
     if output_type == "10":
         return x
     elif output_type == "2":
-        return in_2(x)
+        return in_2(int(x))
     elif output_type == "8":
-        return in_8(x)
+        return in_8(int(x))
     elif output_type == "16":
-        return in_16(x)
+        return in_16(int(x))
     return "Ви вказали невірну систему числення"
