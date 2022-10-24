@@ -77,9 +77,9 @@ async def setbirthday(ctx, day, month, year):
     cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(str(ctx.message.author.id)))
     row = cursor.fetchone()
     if row is not None:
-        cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, year, str(ctx.message.author.id)))
+        cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, int(year), str(ctx.message.author.id)))
     else:
-        cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(str(ctx.message.author.id), day+month, year))
+        cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(str(ctx.message.author.id), day+month, int(year)))
     table.commit()
     cursor.close()
     table.close()
