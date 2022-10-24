@@ -118,7 +118,7 @@ def congrat_happy_birthday():
     row = cursor.fetchone()
     for i in Bot.guilds:
         if channel == discord.ChannelType:
-            for j in i.channels:
+            for j in i.text_channels:
                 if str(j.id) == "1033134557467267135":
                     channel = j
                     break
