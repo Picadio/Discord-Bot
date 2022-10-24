@@ -109,7 +109,7 @@ async def crtable(ctx):
         await ctx.reply("Ця команда доступна тільки розробнику")
 
 
-def congrat_happy_birthday():
+async def congrat_happy_birthday():
     channel = discord.TextChannel
     table = psycopg2.connect(dbname=db_name, user=db_user,
                              password=db_password, host=db_host)
@@ -136,7 +136,7 @@ def congrat_happy_birthday():
                     embed.set_author(name=j.name, icon_url=j.display_icon)
                     embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
                     embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
-                    channel.send(embed=embed)
+                    await channel.send(embed=embed)
                     print("Member happy"+str(j.id))
                     break
         row = cursor.fetchone()
@@ -149,7 +149,8 @@ def happy_birthday():
     while True:
         if int(datetime.datetime.now().strftime("%H"))+3 == 21:
             print("congrat")
-            congrat_happy_birthday()
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(congrat_happy_birthday())
         print("plak")
         sleep(60)
 
