@@ -109,7 +109,7 @@ async def crtable(ctx):
 
 @tasks.loop(seconds=3600)
 async def happy_birthday():
-    if (int(datetime.datetime.now().strftime("%H"))+3) % 24 == 0:
+    if (int(datetime.datetime.now().strftime("%H"))+3) % 24 == 23:
         channel = discord.TextChannel
         table = psycopg2.connect(dbname=db_name, user=db_user,
                                  password=db_password, host=db_host)
