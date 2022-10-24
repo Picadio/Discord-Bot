@@ -139,7 +139,7 @@ async def happy_birthday():
 
 
                 row = cursor.fetchone()
-        await asyncio.sleep(3600)
+        sleep(3600)
 
 Thread(target=happy_birthday).start()
 
