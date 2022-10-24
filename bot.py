@@ -109,37 +109,42 @@ async def crtable(ctx):
         await ctx.reply("Ця команда доступна тільки розробнику")
 
 
+async def congrat_happy_birthday():
+    channel = discord.ChannelType
+    table = psycopg2.connect(dbname=db_name, user=db_user,
+                             password=db_password, host=db_host)
+    cursor = table.cursor()
+    cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
+    row = cursor.fetchone()
+    for i in Bot.guilds:
+        if channel == discord.ChannelType:
+            for j in i.channels:
+                if str(j.id) == "1033134557467267135":
+                    channel = j
+                    break
+        else:
+            break
+    while row is not None:
+        for i in Bot.guilds:
+            for j in i.members:
+                if str(j.id) == row[0]:
+                    embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
+                    embed.set_author(name=j.name, icon_url=j.display_icon)
+                    embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
+                    embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
+                    await channel.send(embed=embed)
+                    break
+
+
+        row = cursor.fetchone()
+
+
 def happy_birthday():
     while True:
         if datetime.datetime.now().strftime("%H") == "00":
-            channel = discord.ChannelType
-            table = psycopg2.connect(dbname=db_name, user=db_user,
-                                     password=db_password, host=db_host)
-            cursor = table.cursor()
-            cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
-            row = cursor.fetchone()
-            for i in Bot.guilds:
-                if channel == discord.ChannelType:
-                    for j in i.channels:
-                        if str(j.id) == "1033134557467267135":
-                            channel = j
-                            break
-                else:
-                    break
-            while row is not None:
-                for i in Bot.guilds:
-                    for j in i.members:
-                        if str(j.id) == row[0]:
-                            embed=discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
-                            embed.set_author(name=j.name, icon_url=j.display_icon)
-                            embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
-                            embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
-                            await channel.send(embed=embed)
-                            break
-
-
-                row = cursor.fetchone()
+            congrat_happy_birthday()
         sleep(3600)
+
 
 Thread(target=happy_birthday).start()
 
