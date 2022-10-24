@@ -1,16 +1,12 @@
-import asyncio
 import datetime
 from discord.ext import tasks
 
 import discord
-
 from Class import *
 import os
 from discord import app_commands
 import psycopg2
-from threading import Thread
-from time import sleep
-from asgiref.sync import async_to_sync
+
 
 db_url = str(os.environ.get("DATABASE_URL"))
 db_url = db_url.replace("postgres://", "")
@@ -23,9 +19,6 @@ db_name = x[2].split("/")[1]
 Bot = bot()
 
 
-@Bot.event
-async def on_ready():
-    print("Bot is online")
 
 #    COMMAND
 
@@ -114,9 +107,9 @@ async def crtable(ctx):
 
 
 
-@tasks.loop(seconds=60.0)
+@tasks.loop(seconds=3600)
 async def happy_birthday():
-    if int(datetime.datetime.now().strftime("%H"))+3 == 21:
+    if (int(datetime.datetime.now().strftime("%H"))+3) % 24 == 0:
         channel = discord.TextChannel
         table = psycopg2.connect(dbname=db_name, user=db_user,
                                  password=db_password, host=db_host)
@@ -126,10 +119,7 @@ async def happy_birthday():
         for i in Bot.guilds:
             if channel == discord.TextChannel:
                 for j in i.text_channels:
-                    print(j.id)
                     if str(j.id) == "1033134557467267135":
-                        print("da")
-                        print(j.name)
                         channel = j
                         break
             else:
@@ -139,22 +129,26 @@ async def happy_birthday():
             for i in Bot.guilds:
                 for j in i.members:
                     if str(j.id) == str(row[0]):
-                        embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
-                        embed.set_author(name=j.name, icon_url=j.display_icon)
+                        embed = discord.Embed(title="Member birthday", color=0xff00bb, description="=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Виповнилося {1}".format(j.mention, datetime.datetime.now().year - int(row[2])))
+                        embed.set_author(name=j.name, icon_url=j.avatar)
                         embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
-                        embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
+                        #embed.set_footer(text="Років виповнилося {0}".format(datetime.datetime.now().year - int(row[2])))
+                        #embed.add_field(name="Виповнилося", value=str(datetime.datetime.now().year - int(row[2])), inline=True)
                         await channel.send(embed=embed)
-                        print("Member happy"+str(j.id))
+                        print("Member happy "+str(j.id))
+                        row = tuple("0")
                         break
             row = cursor.fetchone()
-        print("CONGRAT DONE")
         cursor.close()
         table.close()
 
-    print("plak")
+    print("Non birthday")
 
 
-happy_birthday.start()
+@Bot.event
+async def on_ready():
+    print("Bot is online")
+    happy_birthday.start()
 
 
 token = os.environ.get("BOT_TOKEN")
