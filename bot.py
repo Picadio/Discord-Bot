@@ -119,7 +119,10 @@ def congrat_happy_birthday():
     for i in Bot.guilds:
         if channel == discord.ChannelType:
             for j in i.text_channels:
+                print(j.id)
                 if str(j.id) == "1033134557467267135":
+                    print("da")
+                    print(j.name)
                     channel = j
                     break
         else:
