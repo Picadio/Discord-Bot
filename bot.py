@@ -144,8 +144,9 @@ def happy_birthday():
         if datetime.datetime.now().strftime("%H") == "20":
             print("congrat")
             congrat_happy_birthday()
+        print(datetime.datetime.now().strftime("%H"))
         print("plak")
-        sleep(3600)
+        sleep(60)
 
 
 Thread(target=happy_birthday).start()
