@@ -110,51 +110,50 @@ async def crtable(ctx):
         await ctx.reply("Ця команда доступна тільки розробнику")
 
 
+
+
+
+
 @async_to_sync
-async def congrat_happy_birthday():
-    channel = discord.TextChannel
-    table = psycopg2.connect(dbname=db_name, user=db_user,
-                             password=db_password, host=db_host)
-    cursor = table.cursor()
-    cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
-    row = cursor.fetchone()
-    for i in Bot.guilds:
-        if channel == discord.TextChannel:
-            for j in i.text_channels:
-                print(j.id)
-                if str(j.id) == "1033134557467267135":
-                    print("da")
-                    print(j.name)
-                    channel = j
-                    break
-        else:
-            break
-    print(channel.name)
-    while row is not None:
-        for i in Bot.guilds:
-            for j in i.members:
-                if str(j.id) == str(row[0]):
-                    embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
-                    embed.set_author(name=j.name, icon_url=j.display_icon)
-                    embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
-                    embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
-                    await channel.send(embed=embed)
-                    print("Member happy"+str(j.id))
-                    break
-        row = cursor.fetchone()
-    print("CONGRAT DONE")
-    cursor.close()
-    table.close()
-
-
-def happy_birthday():
+async def happy_birthday():
     while True:
         if int(datetime.datetime.now().strftime("%H"))+3 == 21:
-            congrat_happy_birthday()
-            print("congrat")
+            channel = discord.TextChannel
+            table = psycopg2.connect(dbname=db_name, user=db_user,
+                                     password=db_password, host=db_host)
+            cursor = table.cursor()
+            cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
+            row = cursor.fetchone()
+            for i in Bot.guilds:
+                if channel == discord.TextChannel:
+                    for j in i.text_channels:
+                        print(j.id)
+                        if str(j.id) == "1033134557467267135":
+                            print("da")
+                            print(j.name)
+                            channel = j
+                            break
+                else:
+                    break
+            print(channel.name)
+            while row is not None:
+                for i in Bot.guilds:
+                    for j in i.members:
+                        if str(j.id) == str(row[0]):
+                            embed = discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
+                            embed.set_author(name=j.name, icon_url=j.display_icon)
+                            embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
+                            embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
+                            await channel.send(embed=embed)
+                            print("Member happy"+str(j.id))
+                            break
+                row = cursor.fetchone()
+            print("CONGRAT DONE")
+            cursor.close()
+            table.close()
 
         print("plak")
-        sleep(60)
+        await asyncio.sleep(60)
 
 
 Thread(target=happy_birthday).start()
