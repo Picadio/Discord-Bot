@@ -110,7 +110,7 @@ async def crtable(ctx):
 
 
 def congrat_happy_birthday():
-    channel = discord.ChannelType
+    channel = discord.TextChannel
     table = psycopg2.connect(dbname=db_name, user=db_user,
                              password=db_password, host=db_host)
     cursor = table.cursor()
