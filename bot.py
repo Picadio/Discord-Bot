@@ -74,12 +74,12 @@ async def setbirthday(ctx, day, month, year):
     table = psycopg2.connect(dbname=db_name, user=db_user,
                              password=db_password, host=db_host)
     cursor = table.cursor()
-    cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(ctx.message.author.id))
+    cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(str(ctx.message.author.id)))
     row = cursor.fetchone()
     if row is not None:
-        cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, year, ctx.message.author.id))
+        cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, year, str(ctx.message.author.id)))
     else:
-        cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(ctx.message.author.id, day+month, year))
+        cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(str(ctx.message.author.id), day+month, year))
     table.commit()
     cursor.close()
     table.close()
@@ -121,7 +121,7 @@ async def happy_birthday():
             for i in Bot.guilds:
                 if channel == discord.ChannelType:
                     for j in i.channels:
-                        if j.id == "1033134557467267135":
+                        if str(j.id) == "1033134557467267135":
                             channel = j
                             break
                 else:
@@ -129,7 +129,7 @@ async def happy_birthday():
             while row is not None:
                 for i in Bot.guilds:
                     for j in i.members:
-                        if j.id == row[0]:
+                        if str(j.id) == row[0]:
                             embed=discord.Embed(title="<big><b>Member birthday</b></big>", color=0x2bff00)
                             embed.set_author(name=j.name, icon_url=j.display_icon)
                             embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
