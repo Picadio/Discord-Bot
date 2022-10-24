@@ -93,7 +93,7 @@ async def setbirthday(ctx, day, month, year):
 
 @Bot.command(pass_context=True)
 async def crtable(ctx):
-    if ctx.message.author.id == "343279631807545356":
+    if str(ctx.message.author.id) == "343279631807545356":
 
         table = psycopg2.connect(dbname=db_name, user=db_user,
                                 password=db_password, host=db_host)
