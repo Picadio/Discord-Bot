@@ -141,7 +141,7 @@ async def congrat_happy_birthday():
 
 def happy_birthday():
     while True:
-        if datetime.datetime.now().strftime("%H") == "00":
+        if datetime.datetime.now().strftime("%H") == "20":
             print("congrat")
             congrat_happy_birthday()
         print("plak")
