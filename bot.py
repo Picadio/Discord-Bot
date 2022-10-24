@@ -117,7 +117,7 @@ def congrat_happy_birthday():
     cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
     row = cursor.fetchone()
     for i in Bot.guilds:
-        if channel == discord.ChannelType:
+        if channel == discord.TextChannel:
             for j in i.text_channels:
                 print(j.id)
                 if str(j.id) == "1033134557467267135":
