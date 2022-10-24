@@ -109,7 +109,7 @@ async def crtable(ctx):
         await ctx.reply("Ця команда доступна тільки розробнику")
 
 
-async def happy_birthday():
+def happy_birthday():
     while True:
         if datetime.datetime.now().strftime("%H") == "00":
             channel = discord.ChannelType
