@@ -109,7 +109,7 @@ async def crtable(ctx):
         await ctx.reply("Ця команда доступна тільки розробнику")
 
 
-async def congrat_happy_birthday():
+def congrat_happy_birthday():
     channel = discord.ChannelType
     table = psycopg2.connect(dbname=db_name, user=db_user,
                              password=db_password, host=db_host)
@@ -132,7 +132,7 @@ async def congrat_happy_birthday():
                     embed.set_author(name=j.name, icon_url=j.display_icon)
                     embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
                     embed.add_field(name="", value="З ДНЕМ НАРОДЖЕННЯ {0}! 🎂".format(j.mention), inline=True)
-                    await channel.send(embed=embed)
+                    channel.send(embed=embed)
                     break
 
 
