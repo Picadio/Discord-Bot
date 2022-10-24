@@ -99,7 +99,7 @@ async def crtable(ctx):
                                 password=db_password, host=db_host)
 
         cursor = table.cursor()
-        cursor.execute('''CREATE TABLE birthday_tab (id text, month_day text, yr integer)''')
+        cursor.execute('''CREATE TABLE birthday_tab (id bigint, month_day integer, yr integer)''')
         table.commit()
         print("Sucessful")
         cursor.close()
