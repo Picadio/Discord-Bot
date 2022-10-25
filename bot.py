@@ -76,7 +76,8 @@ async def check_birthday_all(ctx):
     while row is not None:
         user = await Bot.fetch_user(int(row[0]))
         md = str(row[1])
-        print(md)
+        if len(md) == 4:
+            md = "0" + md
         embed.add_field(name=user.mention, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
         row = cursor.fetchone()
     await ctx.reply(embed=embed)
@@ -166,7 +167,7 @@ async def happy_birthday():
         table = psycopg2.connect(dbname=db_name, user=db_user,
                                  password=db_password, host=db_host)
         cursor = table.cursor()
-        cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(datetime.datetime.now().strftime("%d%m")))
+        cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(int(datetime.datetime.now().strftime("%d%m"))))
         row = cursor.fetchone()
         for i in Bot.guilds:
             if channel == discord.TextChannel:
