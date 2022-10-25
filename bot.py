@@ -79,7 +79,7 @@ async def check_birthday_all(ctx):
         if len(md) == 3:
             md = "0" + md
 
-        embed.add_field(name=us.name.mention, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
+        embed.add_field(name=us.mention, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
         row = cursor.fetchone()
     await ctx.reply(embed=embed)
 
