@@ -73,14 +73,14 @@ async def check_birthday_all(ctx):
     row = cursor.fetchone()
     embed = discord.Embed(title="🎂 Дні народження 🎂", description="============================")
     embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1719/1719458.png")
-    embed.set_footer(text="Викликано {0}".format(ctx.message.author.display_name))
+    embed.set_footer(text="Викликано: {0}".format(ctx.message.author.display_name), icon_url=ctx.message.author.avatar)
     while row is not None:
         user = ctx.message.guild.get_member(int(row[0]))
         md = str(row[1])
         if len(md) == 3:
             md = "0" + md
 
-        embed.add_field(name=user.mention, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
+        embed.add_field(name=user.display_name, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
         row = cursor.fetchone()
     await ctx.reply(embed=embed)
 
