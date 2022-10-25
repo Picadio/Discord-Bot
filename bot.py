@@ -115,6 +115,8 @@ async def setbirthday_for(ctx, mem: discord.Member, day, month, year):
             day = "0"+day
         if len(month) == 1:
             month = "0"+month
+        if year == "None":
+            year = "0"
         await ctx.message.delete()
         table = psycopg2.connect(dbname=db_name, user=db_user,
                                  password=db_password, host=db_host)
@@ -160,7 +162,10 @@ async def happy_birthday():
             for i in Bot.guilds:
                 for j in i.members:
                     if str(j.id) == str(row[0]):
-                        embed = discord.Embed(title="Member birthday", color=0xff00bb, description="=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Виповнилося {1}".format(j.mention, datetime.datetime.now().year - int(row[2])))
+                        if row[2] == "0":
+                            embed = discord.Embed(title="Member birthday", color=0xff00bb, description="=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Рік народження не вказаний".format(j.mention))
+                        else:
+                            embed = discord.Embed(title="Member birthday", color=0xff00bb, description="=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Виповнилося {1}".format(j.mention, datetime.datetime.now().year - int(row[2])))
                         embed.set_author(name=j.name, icon_url=j.avatar)
                         embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
                         #embed.set_footer(text="Років виповнилося {0}".format(datetime.datetime.now().year - int(row[2])))
