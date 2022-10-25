@@ -74,7 +74,7 @@ async def check_birthday_all(ctx):
     embed = discord.Embed(title="🎂 Дні народження 🎂", description="============================")
     embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1719/1719458.png")
     while row is not None:
-        user = await Bot.get_user(int(row[0]))
+        user = Bot.get_user(int(row[0]))
         md = str(row[1])
         if len(md) == 3:
             md = "0" + md
