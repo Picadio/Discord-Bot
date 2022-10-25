@@ -75,7 +75,7 @@ async def check_birthday_all(ctx):
     embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1719/1719458.png")
     embed.set_footer(text="Викликано {0}".format(ctx.message.author.display_name))
     while row is not None:
-        user = Bot.get_user(int(row[0]))
+        user = ctx.Bot.get_user(int(row[0]))
         md = str(row[1])
         if len(md) == 3:
             md = "0" + md
