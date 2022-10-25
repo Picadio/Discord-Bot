@@ -63,6 +63,24 @@ async def reformat(ctx, x, input_type, output_type):
     await ctx.reply(ans)
 
 
+@Bot.hybrid_command(name="check_birthday_all", with_app_command=True, description="Подивитися дні народження всіх учасників")
+@app_commands.guilds(discord.Object(id="1020640631175004160"))
+async def check_birthday_all(ctx):
+    table = psycopg2.connect(dbname=db_name, user=db_user,
+                             password=db_password, host=db_host)
+    cursor = table.cursor()
+    cursor.execute('''SELECT * FROM birthday_tab''')
+    row = cursor.fetchone()
+    embed = discord.Embed(title="🎂 Дні народження 🎂", description="============================")
+    embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1719/1719458.png")
+    while row is not None:
+        user = await bot.fetch_user(row[0])
+        md = str(row[1])
+        embed.add_field(name=user.mention, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
+        row = cursor.fetchone()
+    await ctx.reply(embed=embed)
+
+
 @Bot.hybrid_command(name="setbirthday", with_app_command=True, description="Встановити дату народження")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
 async def setbirthday(ctx, day, month, year):
