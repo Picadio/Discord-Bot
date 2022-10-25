@@ -66,35 +66,28 @@ async def reformat(ctx, x, input_type, output_type):
 @Bot.hybrid_command(name="setbirthday", with_app_command=True, description="Встановити дату народження")
 @app_commands.guilds(discord.Object(id="1020640631175004160"))
 async def setbirthday(ctx, day, month, year):
-    if day == "":
-        await ctx.reply("Ви не ввели день")
-    elif month == "":
-        await ctx.reply("Ви не ввели місяць")
-    elif year == "":
-        await ctx.reply("Ви не ввели рік")
-    else:
-        if len(day) == 1:
-            day = "0"+day
-        if len(month) == 1:
-            month = "0"+month
+    if len(day) == 1:
+        day = "0"+day
+    if len(month) == 1:
+        month = "0"+month
 
-        table = psycopg2.connect(dbname=db_name, user=db_user,
-                                 password=db_password, host=db_host)
-        cursor = table.cursor()
-        cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(str(ctx.message.author.id)))
-        row = cursor.fetchone()
-        if row is not None:
-            cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, int(year), str(ctx.message.author.id)))
-        else:
-            cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(str(ctx.message.author.id), day+month, int(year)))
-        table.commit()
-        cursor.close()
-        table.close()
-        embed = discord.Embed(title="✅ Успішно", color=0x2bff00)
-        embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/2362/2362432.png")
-        embed.add_field(name="Дата народження", value=day+"."+month+"."+year, inline=True)
-        embed.set_footer(text="Встановлено для {0}".format(ctx.message.author))
-        await ctx.reply(embed=embed)
+    table = psycopg2.connect(dbname=db_name, user=db_user,
+                             password=db_password, host=db_host)
+    cursor = table.cursor()
+    cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(str(ctx.message.author.id)))
+    row = cursor.fetchone()
+    if row is not None:
+        cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, int(year), str(ctx.message.author.id)))
+    else:
+        cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(str(ctx.message.author.id), day+month, int(year)))
+    table.commit()
+    cursor.close()
+    table.close()
+    embed = discord.Embed(title="✅ Успішно", color=0x2bff00)
+    embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/2362/2362432.png")
+    embed.add_field(name="Дата народження", value=day+"."+month+"."+year, inline=True)
+    embed.set_footer(text="Встановлено для {0}".format(ctx.message.author.name))
+    await ctx.reply(embed=embed)
 
 
 
@@ -115,8 +108,34 @@ async def crtable(ctx):
     else:
         await ctx.reply("Ця команда доступна тільки розробнику")
 
+@Bot.command(pass_context=True)
+async def setbirthday_for(ctx, mem: discord.Member, day, month, year):
+    if str(ctx.message.author.id) == "343279631807545356":
+        if len(day) == 1:
+            day = "0"+day
+        if len(month) == 1:
+            month = "0"+month
+        await ctx.message.delete()
+        table = psycopg2.connect(dbname=db_name, user=db_user,
+                                 password=db_password, host=db_host)
+        cursor = table.cursor()
+        cursor.execute('''SELECT * FROM birthday_tab where id = {0}'''.format(str(mem.id)))
+        row = cursor.fetchone()
+        if row is not None:
+            cursor.execute('''UPDATE birthday_tab set month_day={0}, yr={1} where id={2}'''.format(day+month, int(year), str(mem.id)))
+        else:
+            cursor.execute('''INSERT INTO birthday_tab (id, month_day, yr) VALUES ({0}, {1}, {2})'''.format(str(mem.id), day+month, int(year)))
+        table.commit()
+        cursor.close()
+        table.close()
+        embed = discord.Embed(title="✅ Успішно", color=0x2bff00)
+        embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/2362/2362432.png")
+        embed.add_field(name="Дата народження", value=day+"."+month+"."+year, inline=True)
+        embed.set_footer(text="Встановлено для {0}".format(mem.name))
+        await ctx.reply(embed=embed)
 
-
+    else:
+        await ctx.send("Ця команда доступна тільки розробнику")
 
 
 @tasks.loop(seconds=3600)
