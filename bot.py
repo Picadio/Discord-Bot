@@ -71,7 +71,7 @@ async def check_birthday_all(ctx):
     cursor = table.cursor()
     cursor.execute('''SELECT * FROM birthday_tab''')
     row = cursor.fetchone()
-    embed = discord.Embed(title="🎂 Дні народження 🎂", description="============================")
+    embed = discord.Embed(title="🎂 Дні народження 🎂", description="============================", colour=0xfff700)
     embed.set_thumbnail(url="https://cdn-icons-png.flaticon.com/512/1719/1719458.png")
     embed.set_footer(text="Викликано: {0}".format(ctx.message.author.display_name), icon_url=ctx.message.author.avatar)
     while row is not None:
