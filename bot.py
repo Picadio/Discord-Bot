@@ -117,7 +117,7 @@ async def setbirthday_for(ctx, mem: discord.Member, day, month, year):
             month = "0"+month
         if year == "None":
             year = "0"
-        await ctx.message.delete()
+
         table = psycopg2.connect(dbname=db_name, user=db_user,
                                  password=db_password, host=db_host)
         cursor = table.cursor()
@@ -135,7 +135,7 @@ async def setbirthday_for(ctx, mem: discord.Member, day, month, year):
         embed.add_field(name="Дата народження", value=day+"."+month+"."+year, inline=True)
         embed.set_footer(text="Встановлено для {0}".format(mem.name))
         await ctx.reply(embed=embed)
-
+        await ctx.message.delete()
     else:
         await ctx.send("Ця команда доступна тільки розробнику")
 
