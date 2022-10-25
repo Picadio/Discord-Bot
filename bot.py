@@ -76,9 +76,9 @@ async def check_birthday_all(ctx):
     while row is not None:
         user = await Bot.fetch_user(int(row[0]))
         md = str(row[1])
-        if len(md) == 4:
+        if len(md) == 3:
             md = "0" + md
-        print(md)
+
         embed.add_field(name=user.mention, value=md[0] + md[1] + "." + md[2] + md[3] + "." + str(row[2]), inline=True)
         row = cursor.fetchone()
     await ctx.reply(embed=embed)
