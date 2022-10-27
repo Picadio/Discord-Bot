@@ -162,54 +162,56 @@ async def setbirthday_for(ctx, mem: discord.Member, day, month, year):
         await ctx.send("Ця команда доступна тільки розробнику")
 
 
-@tasks.loop(seconds=3600)
+@tasks.loop(time = datetime.time(21, 0, 0))
 async def happy_birthday():
-    if (int(datetime.datetime.now().strftime("%H"))+3) % 24 == 0:
-        channel = discord.TextChannel
-        table = psycopg2.connect(dbname=db_name, user=db_user,
-                                 password=db_password, host=db_host)
-        cursor = table.cursor()
-        cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(int(datetime.datetime.now().strftime("%d%m"))))
+    table = psycopg2.connect(dbname=db_name,
+                             user=db_user,
+                             password=db_password,
+                             host=db_host)
+    cursor = table.cursor()
+    cursor.execute('''SELECT * FROM birthday_tab where month_day={0}'''.format(
+        int(datetime.datetime.now().strftime("%d%m"))))
+    row = cursor.fetchone()
+    channel = Bot.get_guild(1020640631175004160).get_channel(1033134557467267135)
+    print(channel.name)
+    while row is not None:
+        user = Bot.get_guild(1020640631175004160).get_member(int(row[0]))
+        if row[2] == "0":
+            embed = discord.Embed(
+                title="Member birthday",
+                color=0xff00bb,
+                description=
+                "=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Рік народження не вказаний"
+                .format(user.mention))
+        else:
+            embed = discord.Embed(
+                title="Member birthday",
+                color=0xff00bb,
+                description=
+                "=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Виповнилося {1}"
+                .format(user.mention,
+                        datetime.datetime.now().year - int(row[2])))
+        embed.set_author(name=user.name, icon_url=user.avatar)
+        embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
+        #embed.set_footer(text="Років виповнилося {0}".format(datetime.datetime.now().year - int(row[2])))
+        #embed.add_field(name="Виповнилося", value=str(datetime.datetime.now().year - int(row[2])), inline=True)
+        mess = await channel.send("@everyone")
+        await channel.send(embed=embed)
+        await mess.delete()
+        print("Member happy " + str(user.name))
+        row = tuple("0")
         row = cursor.fetchone()
-        for i in Bot.guilds:
-            if channel == discord.TextChannel:
-                for j in i.text_channels:
-                    if str(j.id) == "1033134557467267135":
-                        channel = j
-                        break
-            else:
-                break
-        print(channel.name)
-        while row is not None:
-            for i in Bot.guilds:
-                for j in i.members:
-                    if str(j.id) == str(row[0]):
-                        if row[2] == "0":
-                            embed = discord.Embed(title="Member birthday", color=0xff00bb, description="=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Рік народження не вказаний".format(j.mention))
-                        else:
-                            embed = discord.Embed(title="Member birthday", color=0xff00bb, description="=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Виповнилося {1}".format(j.mention, datetime.datetime.now().year - int(row[2])))
-                        embed.set_author(name=j.name, icon_url=j.avatar)
-                        embed.set_thumbnail(url="https://i.imgur.com/wlA4lOm.gif")
-                        #embed.set_footer(text="Років виповнилося {0}".format(datetime.datetime.now().year - int(row[2])))
-                        #embed.add_field(name="Виповнилося", value=str(datetime.datetime.now().year - int(row[2])), inline=True)
-                        mess = await channel.send("@everyone")
-                        await channel.send(embed=embed)
-                        await mess.delete()
-                        print("Member happy "+str(j.id))
-                        row = tuple("0")
+    cursor.close()
+    table.close()
 
-                        break
-            row = cursor.fetchone()
-        cursor.close()
-        table.close()
-
-    print("Non birthday")
+    print("check birthday")
 
 
 @Bot.event
 async def on_ready():
     print("Bot is online")
     happy_birthday.start()
+    print(datetime.datetime.now())
 
 
 token = os.environ.get("BOT_TOKEN")
