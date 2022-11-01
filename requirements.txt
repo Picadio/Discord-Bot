@@ -4,3 +4,4 @@ websockets
 chardet
 psycopg2
 asgiref
+pytz
