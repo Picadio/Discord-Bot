@@ -13,13 +13,13 @@ UA_timezone = pytz.timezone("Europe/Kiev")
 utc = (int(datetime.datetime.now(UA_timezone).strftime("%H"))-int(datetime.datetime.now().strftime("%H"))+24) % 24
 status = cycle(["як написати бота", "як приготувати хом'яка"])
 
-db_url = str(os.environ.get("DATABASE_URL"))
+db_url = str(os.environ.get("DB_URL"))
 db_url = db_url.replace("postgres://", "")
 x = db_url.split(":")
 db_user = x[0]
 db_password = x[1].split("@")[0]
-db_host = x[1].split("@")[1]
-db_name = x[2].split("/")[1]
+db_host = x[1].split("@")[1].split("/")[0]
+db_name = x[1].split("/")[1]
 
 Bot = bot()
 
