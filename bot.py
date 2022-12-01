@@ -191,7 +191,7 @@ async def happy_birthday():
     channel = Bot.get_guild(1020640631175004160).get_channel(1033134557467267135)
     while row is not None:
         user = Bot.get_guild(1020640631175004160).get_member(int(row[0]))
-        if row[2] == "0":
+        if row[2] == '0':
             embed = discord.Embed(title="Member birthday", color=0xff00bb, description=
                 "=============================== \n З ДНЕМ НАРОДЖЕННЯ {0}! 🎂 \n =============================== \n Рік народження не вказаний"
                 .format(user.mention))
